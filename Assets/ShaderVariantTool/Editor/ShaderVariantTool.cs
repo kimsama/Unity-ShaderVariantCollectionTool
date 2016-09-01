@@ -37,7 +37,7 @@ namespace ShaderVariant.Tool
         
         private readonly string assetFileExt = ".shadervariants";
         [HideInInspector]
-        public string assetFileName = "New ShaverVariant";
+        public string assetFileName = "NewShaderVariants";
 
         /// <summary>
         /// Collect shader variants from shader files which are under the given path.

@@ -10,6 +10,7 @@ using UnityEngine.Rendering;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
+using System;
 using System.Collections;
 using System.IO;
 
@@ -51,22 +52,25 @@ namespace ShaderVariant.Tool
                 return;
             }
 
-            if (keywords.Length <= 0)
-            {
-                string msg = "Empty keywords.\nSet the necessary 'keywords'.";
-                EditorUtility.DisplayDialog("Error", msg,"OK");
-                return;
-            }
-
             var collection = new ShaderVariantCollection();
             
             var shaders = AssetDatabase.FindAssets("t:Shader", folders);
-            foreach (var guid in shaders)
+
+            try
             {
-                var path = AssetDatabase.GUIDToAssetPath(guid);
-                var shader = AssetDatabase.LoadAssetAtPath<Shader>(path);
-                var variant = new ShaderVariantCollection.ShaderVariant(shader, passType, keywords);
-                collection.Add(variant);
+                foreach (var guid in shaders)
+                {
+                    var path = AssetDatabase.GUIDToAssetPath(guid);
+                    var shader = AssetDatabase.LoadAssetAtPath<Shader>(path);
+                    var variant = new ShaderVariantCollection.ShaderVariant(shader, passType, keywords);
+                    collection.Add(variant);
+                }
+            }
+            catch(Exception e)
+            {
+                // Throw an ArgumentException if shader is null, 
+                // pass type does not exist or variant with the passed keywords is not found.
+                EditorUtility.DisplayDialog("Error", e.Message, "OK");
             }
             
             // save as asset.

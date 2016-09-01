@@ -5,9 +5,8 @@ Unity's default behaviour is to postpone the compilation / optimization of a sha
 
 See [ShaderVariantCollection.WarmUp](https://docs.unity3d.com/ScriptReference/ShaderVariantCollection.WarmUp.html) document for more details. 
 
-It collects shader variants which will be used during a play session and save it out as an asset so which can be set on 'Graphics Setting'.
-
-It allows preloading that shaders so can prevent shader compilation problem causes cpu spike when a model is firstly shown.
+It collects shader variants which will be used during a play session and save it out as an asset so which can be set on 'Graphics Setting', 
+so it allows preloading that shaders which can prevent shader compilation problem causes cpu spike when a model is firstly shown.
 
 ## References
 
